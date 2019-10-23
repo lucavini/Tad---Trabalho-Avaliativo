@@ -12,5 +12,6 @@ int BuscarDocente(Docente *docentes, int cont);
 void alterarDocente(Docente *docentes, int cont);
 void removerDocente(Docente *docentes, int *cont);
 //---------------------------------------------------------------------------------------- DISCENTE
-Discente *cadastrarDicente(Discente *discentes, int *contDiscentes);
+Discente *cadastrarDiscente(Discente *discentes, int *contDiscentes);
+void mostrarDiscentes(Discente *discentes, int cont);
 

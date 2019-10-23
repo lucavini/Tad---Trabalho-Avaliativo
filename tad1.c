@@ -30,7 +30,8 @@ int menu(){
     printf("3 - Buscar Docente\n");
     printf("4 - Alterar Docente\n");
     printf("5 - Remover Docente\n");
-    printf("6 - Cadastrae Discente\n");
+    printf("6 - Cadastrar Discente\n");
+    printf("7 - Mostrar Discente\n");
     printf("0 - Sair\n");
     printf("Escolha uma opção: ");
     scanf("%d",&op);
@@ -63,17 +64,13 @@ Docente *cadastrarDocente(Docente *docentes, int *cont){
 void mostrarDocentes(Docente *docentes, int cont){
     printf("--------- Lista de Docentes ---------\n");
     for(int i = 0; i<cont; i++){
-        if (docentes[i].info_docente.nome != NULL){
-            printf("------ Professor %d ------\n",i+1);
-            printf("Nome: %s\n",docentes[i].info_docente.nome);
-            printf("Idade: %d\n",docentes[i].info_docente.idade);
-            printf("ID: %d\n",docentes[i].info_docente.ID);
-            printf("Matricula: %d\n",docentes[i].info_docente.matricula);
-            printf("Quantidade orientados graduandos: %d\n",docentes[i].qtd_orientacoes_graduacao);
-            printf("Quantidade orientados pos-graduandos: %d\n", docentes[i].qtd_orientacoes_pos_graduacao);
-        }else{
-            continue;
-        }
+        printf("------ Professor %d ------\n",i+1);
+        printf("Nome: %s\n",docentes[i].info_docente.nome);
+        printf("Idade: %d\n",docentes[i].info_docente.idade);
+        printf("ID: %d\n",docentes[i].info_docente.ID);
+        printf("Matricula: %d\n",docentes[i].info_docente.matricula);
+        printf("Quantidade orientados graduandos: %d\n",docentes[i].qtd_orientacoes_graduacao);
+        printf("Quantidade orientados pos-graduandos: %d\n", docentes[i].qtd_orientacoes_pos_graduacao);
     }
 }
 
@@ -133,6 +130,50 @@ void removerDocente(Docente *docentes, int *cont){
 }
 
 //---------------------------------------------------------------------------------------- DISCENTE
-Discente *cadastrarDicente(Discente *discentes, int *contDiscentes){
+Discente *cadastrarDiscente(Discente *discentes, int *cont){
+    int i = 0;
+    discentes = (Discente*)realloc(discentes,sizeof(Discente)*(*cont + 1));
+
+    printf("Digite o nome do aluno: ");
+    setbuf(stdin,NULL);
+    discentes[*cont].info_discente.nome = (char *)malloc(sizeof(char)*60);
+    scanf("%[^\n]",discentes[*cont].info_discente.nome);
+    printf("Digite a idade do aluno: ");
+    scanf("%d", &discentes[*cont].info_discente.idade);
+    printf("Informe o nível do aluno(1 - graduando | 2 - Pós-graduando): ");
+    do{
+        scanf("%d", &discentes[*cont].nivel);
+    }while( (discentes[*cont].nivel != 1) && (discentes[*cont].nivel != 2) );
+
+    printf("Curso do aluno: ");
+    setbuf(stdin,NULL);
+    discentes[*cont].nome_curso = (char *)malloc(sizeof(char)*20);
+    scanf("%[^\n]",discentes[*cont].nome_curso);
+
+    discentes[*cont].info_discente.ID = rand() % 10000;
+
+    srand(time(NULL));
+    discentes[*cont].info_discente.matricula = rand()%10000;
+
+    (*cont)++;
+    return discentes;
     
+}
+
+void mostrarDiscentes(Discente *discentes, int cont){
+    printf("--------- Lista de Discentes ---------\n");
+    for(int i = 0; i<cont; i++){
+        printf("---------- Aluno %d -----------\n",i+1);
+        printf("Nome: %s\n",discentes[i].info_discente.nome);
+        printf("Idade: %d\n",discentes[i].info_discente.idade);
+        printf("ID: %d\n",discentes[i].info_discente.ID);
+        printf("Matricula: %d\n",discentes[i].info_discente.matricula);
+        if (discentes[i].nivel == 1){
+            printf("Nivel: Graduando\n");
+        }else{
+            printf("Nivel: Pós-graduando\n");
+
+        }
+        printf("Curso: %s\n",discentes[i].nome_curso);
+    }
 }

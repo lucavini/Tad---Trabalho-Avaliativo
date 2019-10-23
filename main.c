@@ -34,7 +34,16 @@ void main(){
                 system("clear || cls");
                 removerDocente(docentes, &contDocentes);
                 break;
+            case 6:
+                system("clear || cls");
+                discentes = cadastrarDiscente(discentes, &contDiscentes);
+                break;
+            case 7:
+                system("clear || cls");
+                mostrarDiscentes(discentes, contDiscentes);
+                break;
             }
+
 
     }while(op != 0);
 }
