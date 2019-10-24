@@ -43,6 +43,9 @@ int menuDocente(){
     printf("5 - Remover Docente\n");
     printf("6 - Cadastrar Discente\n");
     printf("7 - Mostrar Discente\n");
+    printf("8 - Buscar Discente\n");
+    printf("9 - Alterar Discente\n");
+    printf("10 - Remover Discente\n");
     printf("0 - Votar ao menu principal\n");
     printf("Escolha uma opção: ");
     scanf("%d",&op);
