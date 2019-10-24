@@ -21,10 +21,21 @@ struct discente{
     char *nome_curso;
     int senha, ID_orientador, ID_coorientador;
 };
-//---------------------------------------------------------------------------------------- MENU
-int menu(){
+//---------------------------------------------------------------------------------------- MENU PRINCIPAL
+int menuPrincipal(){
     int op;
-    printf("------- Menu ------\n");
+    printf("------- Menu Principal------\n");
+    printf("1 - Docentes\n");
+    printf("2 - Discentes\n");
+    printf("0 - Sair\n");
+    printf("Escolha uma opção: ");
+    scanf("%d",&op);
+    return op;
+}
+//---------------------------------------------------------------------------------------- MENU DOCENTE
+int menuDocente(){
+    int op;
+    printf("------- Menu Docente------\n");
     printf("1 - Cadastrar Docentes\n");
     printf("2 - Mostrar Docentes\n");
     printf("3 - Buscar Docente\n");
@@ -32,11 +43,18 @@ int menu(){
     printf("5 - Remover Docente\n");
     printf("6 - Cadastrar Discente\n");
     printf("7 - Mostrar Discente\n");
-    printf("0 - Sair\n");
+    printf("0 - Votar ao menu principal\n");
     printf("Escolha uma opção: ");
     scanf("%d",&op);
     return op;
 }
+//---------------------------------------------------------------------------------------- MENU DICENTE
+// int menuDiscente(){
+//     int op;
+//                                  *************O BAGUIO LA DA IMAGEM************ 
+//     scanf("%d",&op);
+//     return op;
+// }
 //---------------------------------------------------------------------------------------- DOCENTE
 Docente *cadastrarDocente(Docente *docentes, int *cont){
     int i = 0;

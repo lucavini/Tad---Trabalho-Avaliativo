@@ -4,7 +4,9 @@ typedef struct pessoa Pessoa;
 typedef struct docente Docente;
 typedef struct discente Discente;
 
-int menu();
+int menuPrincipal();
+int menuDocente();
+int menuDiscente();
 //---------------------------------------------------------------------------------------- DOCENTE
 Docente *cadastrarDocente(Docente *docentes, int *contDocentes);
 void mostrarDocentes(Docente *docentes, int cont);
