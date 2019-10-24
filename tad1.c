@@ -25,13 +25,17 @@ struct discente{
 int menu(){
     int op;
     printf("------- Menu ------\n");
-    printf("1 - Cadastrar Docentes\n");
-    printf("2 - Mostrar Docentes\n");
-    printf("3 - Buscar Docente\n");
-    printf("4 - Alterar Docente\n");
-    printf("5 - Remover Docente\n");
-    printf("6 - Cadastrar Discente\n");
-    printf("7 - Mostrar Discente\n");
+    printf("1  - Cadastrar Docentes\n");
+    printf("2  - Mostrar Docentes\n");
+    printf("3  - Buscar Docente\n");
+    printf("4  - Alterar Docente\n");
+    printf("5  - Remover Docente\n");
+    printf("6  - Cadastrar Discente\n");
+    printf("7  - Mostrar Discente\n");
+    printf("8  - Buscar Discente\n");
+    printf("9  - Alterar Discentes\n");
+    printf("10 - Remover Discentes\n");
+    printf("11 - Alocar orientador a aluno\n");
     printf("0 - Sair\n");
     printf("Escolha uma opção: ");
     scanf("%d",&op);
@@ -153,7 +157,11 @@ Discente *cadastrarDiscente(Discente *discentes, int *cont){
     discentes[*cont].info_discente.ID = rand() % 10000;
 
     srand(time(NULL));
+    
     discentes[*cont].info_discente.matricula = rand()%10000;
+
+    printf("Digite a senha: ");
+    scanf("%d",&discentes[*cont].senha);
 
     (*cont)++;
     return discentes;
@@ -176,4 +184,73 @@ void mostrarDiscentes(Discente *discentes, int cont){
         }
         printf("Curso: %s\n",discentes[i].nome_curso);
     }
+}
+
+int BuscarDiscente(Discente *discentes, int cont){
+    printf("Digite o nome do aluno que deseja buscar: ");
+    char nome[50];
+    int i;
+    setbuf(stdin,NULL);
+    scanf("%[^\n]",nome);
+
+    for(i = 0; i<cont; i++){
+       
+        if (!strcmp(discentes[i].info_discente.nome, nome)){
+            printf("------ Discente encontrado ------\n");
+            printf("Nome: %s\n",discentes[i].info_discente.nome);
+            printf("idade: %d\n", discentes[i].info_discente.idade);
+            printf("ID: %d\n", discentes[i].info_discente.ID);
+            printf("Matricula: %d\n", discentes[i].info_discente.matricula);
+            if(discentes[i].nivel == 1)
+                printf("Nivel: Graduação\n");
+            else
+                printf("Nivel: pos-graduação\n");
+            printf("Nome do curso: %s\n",discentes[i].nome_curso);
+            return i;
+        }
+    }
+    if(i == cont)
+        printf("Discente não encontrado\n");
+    return -1;
+}
+
+void alterarDiscente(Discente *discentes, int cont){
+    int id = BuscarDiscente(discentes, cont);
+
+    if (id == -1) {
+        printf("Discente não encontrado\n");
+    }else{
+        printf("Digite o nome do Aluno: ");
+        setbuf(stdin, NULL);
+        scanf("%[^\n]", discentes[id].info_discente.nome);
+        printf("Digite a idade do aluno: ");
+        scanf("%d", &discentes[id].info_discente.idade);
+        printf("Digite o nivel do aluno: ");
+        scanf("%d", &discentes[id].nivel);
+        printf("Digite o nome do curso: ");
+        setbuf(stdin, NULL);
+        scanf("%[^\n]", discentes[id].nome_curso);
+        printf("Digite a senha: ");
+        scanf("%d", &discentes[id].senha);
+    }
+    
+}
+
+void removerDiscente(Discente *discentes, int *cont){
+    int i = BuscarDiscente(discentes, (*cont));
+    if (i != -1){
+        discentes[i].info_discente.ID = discentes[(*cont) - 1].info_discente.ID;
+        discentes[i].info_discente.nome = discentes[(*cont) - 1].info_discente.nome;
+        discentes[i].info_discente.idade = discentes[(*cont) - 1].info_discente.idade;
+        discentes[i].info_discente.matricula = discentes[(*cont) - 1].info_discente.matricula;
+        discentes[i].nivel = discentes[(*cont) - 1].nivel;
+        discentes[i].nome_curso = discentes[(*cont) - 1].nome_curso;
+        discentes[i].senha = discentes[(*cont) - 1].senha;
+        (*cont) -= 1;
+    }
+
+}
+
+void alocarOrientador(Discente *discentes, int *qtdDiscentes, Docente *docentes, int *qtdDocentes){
+    for(int i = 0; i<)
 }

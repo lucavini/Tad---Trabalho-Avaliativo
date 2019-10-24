@@ -42,7 +42,20 @@ void main(){
                 system("clear || cls");
                 mostrarDiscentes(discentes, contDiscentes);
                 break;
+            case 8:
+                system("clear || cls");
+                BuscarDiscente(discentes, contDiscentes);
+                break;
+            case 9:
+                system("clear || cls");
+                alterarDiscente(discentes, contDiscentes);
+                break;
+            case 10:
+                system("clear || cls");
+                removerDiscente(discentes, &contDiscentes);
+                break;
             }
+
 
 
     }while(op != 0);
