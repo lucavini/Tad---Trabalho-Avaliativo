@@ -2,6 +2,71 @@
 #include <stdlib.h>
 #include "tad1.h"
 
+void menu(Docente *docentes,int contDocentes,Discente *discentes,int contDiscentes){
+    int esc,op;
+
+    do{
+        esc = menuPrincipal();
+        switch (esc){
+            case 1:
+                system("clear || cls");
+                do{
+                    op = menuDocente();
+                    switch (op){
+                        case 1:
+                            system("clear || cls");
+                            docentes = cadastrarDocente(docentes, &contDocentes);
+                            continue;
+                        case 2:
+                            system("clear || cls");
+                            mostrarDocentes(docentes, contDocentes);
+                            continue;
+                        case 3:
+                            system("clear || cls");
+                            BuscarDocente(docentes, contDocentes);
+                            continue;
+                        case 4:
+                            system("clear || cls");
+                            alterarDocente(docentes, contDocentes);
+                            continue;
+                        case 5:
+                            system("clear || cls");
+                            removerDocente(docentes, &contDocentes);
+                            continue;
+                        case 6:
+                            system("clear || cls");
+                            discentes = cadastrarDiscente(discentes, &contDiscentes);
+                            continue;
+                        case 7:
+                            system("clear || cls");
+                            mostrarDiscentes(discentes, contDiscentes);
+                            continue;
+                        case 8:
+                            system("clear || cls");
+                            BuscarDiscente(discentes, contDiscentes);
+                            break;
+                        case 9:
+                            system("clear || cls");
+                            alterarDiscente(discentes, contDiscentes);
+                            break;
+                        case 10:
+                            system("clear || cls");
+                            removerDiscente(discentes, &contDiscentes);
+                            break;
+                        case 0:
+                            system("clear || cls");
+                            menu(docentes,contDocentes,discentes,contDiscentes);
+                            break;
+                        }
+                }while(op != 0);
+                break;
+                
+            case 0:
+                exit(1);
+        }
+    }while(esc != 0);
+}
+
 void main(){
     Docente *docentes = NULL;
     int contDocentes = 0;
@@ -9,54 +74,5 @@ void main(){
     Discente *discentes = NULL;
     int contDiscentes = 0;
 
-
-    int op;
-    do{
-        op = menu();
-        switch (op){
-            case 1:
-                system("clear || cls");
-                docentes = cadastrarDocente(docentes, &contDocentes);
-                break;
-            case 2:
-                system("clear || cls");
-                mostrarDocentes(docentes, contDocentes);
-                break;
-            case 3:
-                system("clear || cls");
-                BuscarDocente(docentes, contDocentes);
-                break;
-            case 4:
-                system("clear || cls");
-                alterarDocente(docentes, contDocentes);
-                break;
-            case 5:
-                system("clear || cls");
-                removerDocente(docentes, &contDocentes);
-                break;
-            case 6:
-                system("clear || cls");
-                discentes = cadastrarDiscente(discentes, &contDiscentes);
-                break;
-            case 7:
-                system("clear || cls");
-                mostrarDiscentes(discentes, contDiscentes);
-                break;
-            case 8:
-                system("clear || cls");
-                BuscarDiscente(discentes, contDiscentes);
-                break;
-            case 9:
-                system("clear || cls");
-                alterarDiscente(discentes, contDiscentes);
-                break;
-            case 10:
-                system("clear || cls");
-                removerDiscente(discentes, &contDiscentes);
-                break;
-            }
-
-
-
-    }while(op != 0);
+    menu(docentes,contDocentes,discentes,contDiscentes);
 }
