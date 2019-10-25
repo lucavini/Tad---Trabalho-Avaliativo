@@ -4,7 +4,7 @@
 
 void menu(Docente *docentes,int contDocentes,Discente *discentes,int contDiscentes){
     int esc,op;
-
+    int id;
     do{
         esc = menuPrincipal();
         switch (esc){
@@ -43,7 +43,9 @@ void menu(Docente *docentes,int contDocentes,Discente *discentes,int contDiscent
                             continue;
                         case 8:
                             system("clear || cls");
-                            BuscarDiscente(discentes, contDiscentes);
+                            printf("Digite o id do discente que deseja buscar: ");
+                            scanf("%d",&id);
+                            BuscarDiscente(discentes, contDiscentes, id);
                             break;
                         case 9:
                             system("clear || cls");
@@ -52,6 +54,10 @@ void menu(Docente *docentes,int contDocentes,Discente *discentes,int contDiscent
                         case 10:
                             system("clear || cls");
                             removerDiscente(discentes, &contDiscentes);
+                            break;
+                        case 11:
+                            system("clear || cls");
+                            listarNaoOrientados(discentes,contDiscentes);
                             break;
                         case 0:
                             system("clear || cls");

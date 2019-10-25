@@ -16,9 +16,9 @@ void removerDocente(Docente *docentes, int *cont);
 //---------------------------------------------------------------------------------------- DISCENTE
 Discente *cadastrarDiscente(Discente *discentes, int *contDiscentes);
 void mostrarDiscentes(Discente *discentes, int cont);
-int BuscarDiscente(Discente *discentes, int cont);
+int BuscarDiscente(Discente *discentes, int cont, int id);
 void alterarDiscente(Discente *discentes, int cont);
 void removerDiscente(Discente *discentes, int *cont);
-
+void listarNaoOrientados(Discente *discentes, int qtd);
 
 void alocarOrientador(Discente *discentes, int *cont, Docente *docentes, int *contDocentes);
