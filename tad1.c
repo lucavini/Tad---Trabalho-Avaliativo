@@ -47,6 +47,7 @@ int menuDocente(){
     printf("9  - Alterar Discente\n");
     printf("10 - Remover Discente\n");
     printf("11 - Listar não orientados\n");
+    printf("12 - Alocar Orientador\n");
     printf("0 - Votar ao menu principal\n");
     printf("Escolha uma opção: ");
     scanf("%d",&op);
@@ -220,6 +221,8 @@ void mostrarDiscentes(Discente *discentes, int cont){
 
         }
         printf("Curso: %s\n",discentes[i].nome_curso);
+
+        printf("ID do Orientador: %d\n",discentes[i].ID_orientador);
     }
 }
 
@@ -303,8 +306,8 @@ void removerDiscente(Discente *discentes, int *cont){
 }
 
 void listarNaoOrientados(Discente *discentes, int qtd){
+    printf("------ Discentes sem orientador ------\n");
     for(int i = 0; i<qtd; i++){
-        printf("------ Discentes sem orientador ------\n");
         if(discentes[i].ID_orientador == -1){
             BuscarDiscente(discentes, qtd, discentes[i].info_discente.ID);
         }
@@ -312,7 +315,7 @@ void listarNaoOrientados(Discente *discentes, int qtd){
 }
 
 void alocarOrientador(Discente *discentes, int *qtdDiscentes, Docente *docentes, int *qtdDocentes){
-    int id, i, j;
+    int id,idD, i, j;
     listarNaoOrientados(discentes, (*qtdDiscentes));
 
     printf("-------------------------------------------\n");
@@ -323,17 +326,44 @@ void alocarOrientador(Discente *discentes, int *qtdDiscentes, Docente *docentes,
         if (discentes[i].info_discente.ID == id)
             break;
 
+
+    system("clear || cls");
     printf("-------------------------------------------\n");
-    printf("Orientadores disponiveis: ");
+    printf("Orientadores disponiveis: \n");
+
 
     for(j = 0; j<*qtdDocentes; j++){
-        if (discentes[i].nivel == 1)
+        if (discentes[i].nivel == 1){
             if(docentes[j].qtd_orientacoes_graduacao < 4)
                 BuscarDocente(docentes, (*qtdDocentes), docentes[j].info_docente.ID);
-
-        else
+        }else{
             if(docentes[j].qtd_orientacoes_pos_graduacao < 6)
                 BuscarDocente(docentes, (*qtdDocentes), docentes[j].info_docente.ID);
+        }
     }
 
+    printf("-------------------------------------------\n");
+    printf("Digite o id do Orientador para aloca-lo ao aluno: ");
+    scanf("%d",&idD);
+
+    discentes[i].ID_orientador = idD;
+
+    for(j = 0; j<*qtdDocentes; j++){
+        if (docentes[j].info_docente.ID == idD){
+            if(discentes[i].nivel == 1)
+                docentes[j].qtd_orientacoes_graduacao+=1;
+            else
+                docentes[j].qtd_orientacoes_pos_graduacao+=1;
+            break;
+        }
+    }
+
+    printf("Deseja alocar Coorientador ?(1 - sim | 0 - não): ");
+    int op;
+    scanf("%d",&op);
+    if(op){
+        printf("Digite o id do Orientador para aloca-lo ao aluno: ");
+        scanf("%d", &idD);
+        discentes[i].ID_coorientador = idD;
+    }
 }

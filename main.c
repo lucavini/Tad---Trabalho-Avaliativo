@@ -61,6 +61,10 @@ void menu(Docente *docentes,int contDocentes,Discente *discentes,int contDiscent
                             system("clear || cls");
                             listarNaoOrientados(discentes,contDiscentes);
                             break;
+                        case 12:
+                            system("clear || cls");
+                            alocarOrientador(discentes,&contDiscentes,docentes,&contDocentes);
+                            break;
                         case 0:
                             system("clear || cls");
                             menu(docentes,contDocentes,discentes,contDiscentes);
