@@ -23,7 +23,9 @@ void menu(Docente *docentes,int contDocentes,Discente *discentes,int contDiscent
                             continue;
                         case 3:
                             system("clear || cls");
-                            BuscarDocente(docentes, contDocentes);
+                            printf("Digite o id do docente que deseja buscar: ");
+                            scanf("%d", &id);
+                            BuscarDocente(docentes, contDocentes, id);
                             continue;
                         case 4:
                             system("clear || cls");

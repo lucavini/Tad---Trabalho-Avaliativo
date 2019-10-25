@@ -10,7 +10,7 @@ int menuDiscente();
 //---------------------------------------------------------------------------------------- DOCENTE
 Docente *cadastrarDocente(Docente *docentes, int *contDocentes);
 void mostrarDocentes(Docente *docentes, int cont);
-int BuscarDocente(Docente *docentes, int cont);
+int BuscarDocente(Docente *docentes, int cont, int id);
 void alterarDocente(Docente *docentes, int cont);
 void removerDocente(Docente *docentes, int *cont);
 //---------------------------------------------------------------------------------------- DISCENTE

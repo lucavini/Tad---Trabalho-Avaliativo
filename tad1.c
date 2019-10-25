@@ -97,18 +97,13 @@ void mostrarDocentes(Docente *docentes, int cont){
 }
 
 
-int BuscarDocente(Docente *docentes, int cont){
-    printf("Digite o nome do professor que deseja buscar: ");
-    char nome[50];
+int BuscarDocente(Docente *docentes, int cont, int id){
     int i;
-    setbuf(stdin,NULL);
-    scanf("%[^\n]",nome);
-
     for(i = 0; i<cont; i++){
        
-        if (!strcmp(docentes[i].info_docente.nome, nome)){
-            printf("------ Docente encontrado ------\n");
-            printf("Nome: %s\n",docentes[i].info_docente.nome);
+        if (docentes[i].info_docente.ID ==  id){
+            printf("-----------------------------\n");
+            printf("Nome: %s\n", docentes[i].info_docente.nome);
             printf("Idade: %d\n",docentes[i].info_docente.idade);
             printf("ID: %d\n",docentes[i].info_docente.ID);
             printf("Matricula: %d\n",docentes[i].info_docente.matricula);
@@ -123,7 +118,17 @@ int BuscarDocente(Docente *docentes, int cont){
 }
 
 void alterarDocente(Docente *docentes, int cont){
-    int id = BuscarDocente(docentes, cont);
+    char nome[20];
+    int id;
+    printf("Digite o nome do docente que deseja buscar: ");
+    scanf("%[^\n]", nome);
+
+    for (int i = 0; i < cont; i++){
+        if (!strcmp(nome, docentes[i].info_docente.nome)){
+            id = BuscarDocente(docentes, cont, docentes[i].info_docente.ID);
+            break;
+        }
+    }
 
     if (id == -1) {
         printf("Docente não encontrado\n");
@@ -138,7 +143,18 @@ void alterarDocente(Docente *docentes, int cont){
 }
 
 void removerDocente(Docente *docentes, int *cont){
-    int i = BuscarDocente(docentes, (*cont));
+    int id,i;
+    char nome[30];
+    printf("Digite o nome do docente que deseja buscar: ");
+    scanf("%[^\n]",nome);
+
+    for(i = 0; i< *cont; i++){
+        if(!strcmp(nome,docentes[i].info_docente.nome)){
+            id = BuscarDocente(docentes, (*cont), docentes[i].info_docente.ID);
+            break;
+        }
+    }
+
     if (i != -1){
         docentes[i].info_docente.ID = docentes[(*cont) - 1].info_docente.ID;
         docentes[i].info_docente.idade = docentes[(*cont) - 1].info_docente.idade;
@@ -235,9 +251,10 @@ void alterarDiscente(Discente *discentes, int cont){
     printf("Digite o nome do aluno que deseja buscar: ");
     scanf("%[^\n]",nome);
     for(int i = 0; i<cont; i++){
-        if(!strcmp(nome,discentes[i].info_discente.nome))
+        if(!strcmp(nome,discentes[i].info_discente.nome)){
             id = BuscarDiscente(discentes, cont, discentes[i].info_discente.ID);
-        break;
+            break;
+        }
     }
 
     if (id == -1) {
@@ -266,9 +283,10 @@ void removerDiscente(Discente *discentes, int *cont){
     scanf("%[^\n]",nome);
 
     for(int i = 0; i<*cont; i++){
-        if(!strcmp(nome,discentes[i].info_discente.nome))
+        if(!strcmp(nome,discentes[i].info_discente.nome)){
             id = BuscarDiscente(discentes, (*cont), discentes[i].info_discente.ID);
-        break;
+            break;
+        }
     }
 
     if (id != -1){
@@ -294,5 +312,28 @@ void listarNaoOrientados(Discente *discentes, int qtd){
 }
 
 void alocarOrientador(Discente *discentes, int *qtdDiscentes, Docente *docentes, int *qtdDocentes){
+    int id, i, j;
     listarNaoOrientados(discentes, (*qtdDiscentes));
+
+    printf("-------------------------------------------\n");
+    printf("Digite o id do Aluno que deseja alocar: ");
+    scanf("%d",&id);
+
+    for (i = 0; i < *qtdDiscentes; i++)
+        if (discentes[i].info_discente.ID == id)
+            break;
+
+    printf("-------------------------------------------\n");
+    printf("Orientadores disponiveis: ");
+
+    for(j = 0; j<*qtdDocentes; j++){
+        if (discentes[i].nivel == 1)
+            if(docentes[j].qtd_orientacoes_graduacao < 4)
+                BuscarDocente(docentes, (*qtdDocentes), docentes[j].info_docente.ID);
+
+        else
+            if(docentes[j].qtd_orientacoes_pos_graduacao < 6)
+                BuscarDocente(docentes, (*qtdDocentes), docentes[j].info_docente.ID);
+    }
+
 }
