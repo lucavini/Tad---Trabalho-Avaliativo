@@ -1,18 +1,36 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "tad1.h"
+#include "tad2.h"
 
-void menu(Docente *docentes,int contDocentes,Discente *discentes,int contDiscentes){
-    int esc,op;
+void menu(Docente *docentes,int contDocentes,Discente *discentes,int contDiscentes, Imagem *img, int **image);
+
+void main(){
+    Docente *docentes = NULL;
+    int contDocentes = 0;
+
+    Discente *discentes = NULL;
+    int contDiscentes = 0;
+
+    Imagem *img;
+    int **image;
+
+    menu(docentes,contDocentes,discentes,contDiscentes,img,image);
+}
+
+void menu(Docente *docentes,int contDocentes,Discente *discentes,int contDiscentes,Imagem *img, int **image){
+    int esc,op1,op2;
     int id;
+    int alt,lar;
     do{
         esc = menuPrincipal();
         switch (esc){
-            case 1:
+            case 1:  
+                //menu Docente
                 system("clear || cls");
                 do{
-                    op = menuDocente();
-                    switch (op){
+                    op1 = menuDocente();
+                    switch (op1){
                         case 1:
                             system("clear || cls");
                             docentes = cadastrarDocente(docentes, &contDocentes);
@@ -65,26 +83,53 @@ void menu(Docente *docentes,int contDocentes,Discente *discentes,int contDiscent
                             system("clear || cls");
                             alocarOrientador(discentes,&contDiscentes,docentes,&contDocentes);
                             break;
+
+                        case 13: 
+                            //Menu para processar imagem
+                            printf("Digite a matricula do docente: ");
+                            int mat;
+                            scanf("%d",&mat);
+
+                            while(!verificaDocente(docentes, contDocentes, mat)){
+                                printf("Matricula não encontrada\n");
+                                scanf("%d", &mat);
+                            }
+
+                            system("cls || clear");
+                            printf("Matricula encontrada\n");
+                            do{
+                                op2 = menuImagem();
+                                switch (op2){
+                                    case 1:
+                                        system("cls || clear");
+                                        dimencoes(img,&alt,&lar);
+                                        image = alocarMatriz(alt, lar);
+                                        preencherMatriz(image, alt, lar,img);
+                                        break;
+                                    case 2:
+                                        system("cls || clear");
+                                        image = lerImagem(img,&alt,&lar);
+                                        break;
+                                    case 3:
+                                        system("cls || clear");
+                                        salvarImagem(image,alt,lar);
+                                        break;
+                                    case 4:
+                                        system("cls || clear");
+                                        mostrarMatriz(image, alt, lar);
+                                        break;
+                                }
+                            }while(op2 != 0);
                         case 0:
                             system("clear || cls");
-                            menu(docentes,contDocentes,discentes,contDiscentes);
+                            menu(docentes, contDocentes, discentes, contDiscentes, img, image);
                             break;
-                        }
-                }while(op != 0);
+                    }
+                }while(op1 != 0);
                 break;
                 
             case 0:
                 exit(1);
         }
     }while(esc != 0);
-}
-
-void main(){
-    Docente *docentes = NULL;
-    int contDocentes = 0;
-
-    Discente *discentes = NULL;
-    int contDiscentes = 0;
-
-    menu(docentes,contDocentes,discentes,contDiscentes);
 }

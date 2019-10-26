@@ -48,19 +48,38 @@ int menuDocente(){
     printf("10 - Remover Discente\n");
     printf("11 - Listar não orientados\n");
     printf("12 - Alocar Orientador\n");
-    printf("0 - Votar ao menu principal\n");
+    printf("13 - Menu Imagem\n");
+    printf("0  - Votar ao menu principal\n");
     printf("Escolha uma opção: ");
     scanf("%d",&op);
     return op;
 }
 //---------------------------------------------------------------------------------------- MENU DICENTE
-// int menuDiscente(){
-//     int op;
-//                                  *************O BAGUIO LA DA IMAGEM************ 
-//     scanf("%d",&op);
-//     return op;
-// }
+void menuDiscente(Discente *discentes, int qtd){
+    int matricula, senha, i;
+    printf("Digite a matricula e senha: ");
+    scanf("%d%d", &matricula, &senha);
+    for(i = 0; i<qtd; i++){
+        if ((discentes[i].info_discente.matricula == matricula) && (discentes[i].senha == senha)){
+            printf("Acesso permitido\n");
+            break;
+        }
+    }
+
+    if(i == qtd)
+        printf("acesse negado\n");
+    
+}
 //---------------------------------------------------------------------------------------- DOCENTE
+
+int verificaDocente(Docente *docentes, int qtd, int matricula){
+    for(int i = 0; i<qtd; i++)
+        if(docentes[i].info_docente.matricula == matricula){
+            return 1;
+        }
+    return 0;
+}
+
 Docente *cadastrarDocente(Docente *docentes, int *cont){
     int i = 0;
     docentes = (Docente*)realloc(docentes,sizeof(Docente)*(*cont + 1));

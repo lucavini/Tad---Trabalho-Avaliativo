@@ -6,8 +6,9 @@ typedef struct discente Discente;
 
 int menuPrincipal();
 int menuDocente();
-int menuDiscente();
+void menuDiscente();
 //---------------------------------------------------------------------------------------- DOCENTE
+int verificaDocente(Docente *docentes, int qtd, int matricula);
 Docente *cadastrarDocente(Docente *docentes, int *contDocentes);
 void mostrarDocentes(Docente *docentes, int cont);
 int BuscarDocente(Docente *docentes, int cont, int id);
