@@ -22,6 +22,7 @@ void menu(Docente *docentes,int contDocentes,Discente *discentes,int contDiscent
     int esc,op1,op2;
     int id;
     int alt,lar;
+    int matricula, senha;
     do{
         esc = menuPrincipal();
         switch (esc){
@@ -96,7 +97,7 @@ void menu(Docente *docentes,int contDocentes,Discente *discentes,int contDiscent
                             }
 
                             system("cls || clear");
-                            printf("Matricula encontrada\n");
+                            printf("Docente encontrado\n");
                             do{
                                 op2 = menuImagem();
                                 switch (op2){
@@ -127,7 +128,41 @@ void menu(Docente *docentes,int contDocentes,Discente *discentes,int contDiscent
                     }
                 }while(op1 != 0);
                 break;
-                
+            case 2:
+                //menu discente
+                printf("Digite a matricula e senha: ");
+                scanf("%d%d", &matricula, &senha);
+                while(!menuDiscente(discentes, contDiscentes, matricula, senha)){
+                    printf("Discente não encontrado\n");
+                    scanf("%d%d", &matricula, &senha);
+                }
+
+                system("cls || clear");
+                printf("Discente encontrado\n");
+                do{
+                    op2 = menuImagem();
+                    switch (op2){
+                        case 1:
+                            system("cls || clear");
+                            dimencoes(img, &alt, &lar);
+                            image = alocarMatriz(alt, lar);
+                            preencherMatriz(image, alt, lar, img);
+                            break;
+                        case 2:
+                            system("cls || clear");
+                            image = lerImagem(img, &alt, &lar);
+                            break;
+                        case 3:
+                            system("cls || clear");
+                            salvarImagem(image, alt, lar);
+                            break;
+                        case 4:
+                            system("cls || clear");
+                            mostrarMatriz(image, alt, lar);
+                            break;
+                    }
+                }while (op2 != 0);
+                break;
             case 0:
                 exit(1);
         }

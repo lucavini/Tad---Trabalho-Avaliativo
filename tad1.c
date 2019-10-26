@@ -55,20 +55,14 @@ int menuDocente(){
     return op;
 }
 //---------------------------------------------------------------------------------------- MENU DICENTE
-void menuDiscente(Discente *discentes, int qtd){
-    int matricula, senha, i;
-    printf("Digite a matricula e senha: ");
-    scanf("%d%d", &matricula, &senha);
+int menuDiscente(Discente *discentes, int qtd, int matricula, int senha){
+    int i;
     for(i = 0; i<qtd; i++){
         if ((discentes[i].info_discente.matricula == matricula) && (discentes[i].senha == senha)){
-            printf("Acesso permitido\n");
-            break;
+            return 1;
         }
     }
-
-    if(i == qtd)
-        printf("acesse negado\n");
-    
+    return 0;
 }
 //---------------------------------------------------------------------------------------- DOCENTE
 

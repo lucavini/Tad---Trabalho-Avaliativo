@@ -6,7 +6,7 @@ typedef struct discente Discente;
 
 int menuPrincipal();
 int menuDocente();
-void menuDiscente();
+int menuDiscente(Discente *discentes, int qtd, int matricula, int senha);
 //---------------------------------------------------------------------------------------- DOCENTE
 int verificaDocente(Docente *docentes, int qtd, int matricula);
 Docente *cadastrarDocente(Docente *docentes, int *contDocentes);
