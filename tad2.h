@@ -10,3 +10,5 @@ void preencherMatriz(int **imagem, int lin, int col, Imagem *img);
 void mostrarMatriz(int **imagem, int lin, int col);
 int **lerImagem(Imagem *img, int *alt, int *lar);
 void salvarImagem(int **imagem, int lin, int col);
+void distanciaEuclidiana();
+void distanciaManhattan();

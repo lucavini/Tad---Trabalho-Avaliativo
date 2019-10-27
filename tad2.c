@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 #include <time.h>
 #include "tad2.h"
 
@@ -86,6 +87,30 @@ void salvarImagem(int **imagem, int lin, int col){
         fprintf(file, "\n");
     }
     fclose(file);
+}
+
+void distanciaEuclidiana(){
+    Pixel A,B;
+    printf("Digite os valores x e y do ponto A: ");
+    scanf("%d %d", &A.x, &A.y);
+
+    printf("Digite os valores x e y do ponto B: ");
+    scanf("%d %d", &B.x, &B.y);
+    float dis;
+    dis = sqrt( pow(B.x - A.x, 2) + pow(B.y - A.y, 2));
+    printf("%.2f\n",dis);
+}
+
+void distanciaManhattan(){
+    Pixel A, B;
+    printf("Digite os valores x e y do ponto A: ");
+    scanf("%d %d", &A.x, &A.y);
+
+    printf("Digite os valores x e y do ponto B: ");
+    scanf("%d %d", &B.x, &B.y);
+    float dis;
+    dis = (A.x - B.x) + (A.y - B.y);
+    printf("%.2f\n",dis);
 }
 
 int menuImagem(){

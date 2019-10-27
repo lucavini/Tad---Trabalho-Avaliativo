@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "tad1.h"
 #include "tad2.h"
+#include "tad3.h"
 
 void menu(Docente *docentes,int contDocentes,Discente *discentes,int contDiscentes, Imagem *img, int **image);
 
@@ -11,6 +12,7 @@ void main(){
 
     Discente *discentes = NULL;
     int contDiscentes = 0;
+    
 
     Imagem *img;
     int **image;
@@ -23,6 +25,7 @@ void menu(Docente *docentes,int contDocentes,Discente *discentes,int contDiscent
     int id;
     int alt,lar;
     int matricula, senha;
+    Pixel *A, *B;
     do{
         esc = menuPrincipal();
         switch (esc){
@@ -118,6 +121,23 @@ void menu(Docente *docentes,int contDocentes,Discente *discentes,int contDiscent
                                     case 4:
                                         system("cls || clear");
                                         mostrarMatriz(image, alt, lar);
+                                        break;
+                                    case 5:
+                                        system("cls || clear");
+                                        printf("O maior valor é %d \n", maiorValor(image,alt,lar));
+                                        printf("O menor valor é %d \n", menorValor(image, alt, lar));
+                                        break;
+                                    case 6:
+                                        system("cls || clear");
+                                        distanciaEuclidiana();
+                                        break;
+                                    case 7:
+                                        system("cls || clear");
+                                        distanciaManhattan();
+                                        break;
+                                    case 8:
+                                        system("cls || clear");
+                                        LBP(image,alt,lar);
                                         break;
                                 }
                             }while(op2 != 0);
