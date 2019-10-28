@@ -296,6 +296,7 @@ void removerDiscente(Discente *discentes, int *cont){
     int id;
     char nome[30];
     printf("Digite o nome do aluno que deseja buscar: ");
+    setbuf(stdin,NULL);
     scanf("%[^\n]",nome);
 
     for(int i = 0; i<*cont; i++){

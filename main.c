@@ -17,6 +17,7 @@ void main(){
     Imagem *img;
     int **image;
 
+ 
     menu(docentes,contDocentes,discentes,contDiscentes,img,image);
 }
 
@@ -25,6 +26,9 @@ void menu(Docente *docentes,int contDocentes,Discente *discentes,int contDiscent
     int id;
     int alt,lar;
     int matricula, senha;
+    int **imagemMedia;
+    int **imagemMediana;
+
     Pixel *A, *B;
     do{
         esc = menuPrincipal();
@@ -90,6 +94,7 @@ void menu(Docente *docentes,int contDocentes,Discente *discentes,int contDiscent
 
                         case 13: 
                             //Menu para processar imagem
+                            mostrarDocentes(docentes, contDocentes);
                             printf("Digite a matricula do docente: ");
                             int mat;
                             scanf("%d",&mat);
@@ -139,6 +144,16 @@ void menu(Docente *docentes,int contDocentes,Discente *discentes,int contDiscent
                                         system("cls || clear");
                                         LBP(image,alt,lar);
                                         break;
+                                    case 9:
+                                        system("cls || clear");
+                                        imagemMedia = alocarMatriz(alt, lar);
+                                        kernelMedia(imagemMedia,image,alt,lar);
+                                        break;
+                                    case 10:
+                                        system("cls || clear");
+                                        imagemMediana = alocarMatriz(alt, lar);
+                                        kernelMediana(imagemMediana,image,alt,lar);
+                                        break;
                                 }
                             }while(op2 != 0);
                         case 0:
@@ -149,7 +164,7 @@ void menu(Docente *docentes,int contDocentes,Discente *discentes,int contDiscent
                 }while(op1 != 0);
                 break;
             case 2:
-                //menu discente
+
                 printf("Digite a matricula e senha: ");
                 scanf("%d%d", &matricula, &senha);
                 while(!menuDiscente(discentes, contDiscentes, matricula, senha)){

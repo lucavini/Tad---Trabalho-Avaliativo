@@ -116,3 +116,4 @@ void mostrar(int **matriz, int lin, int col){
         printf("\n");
     }
 }
+
