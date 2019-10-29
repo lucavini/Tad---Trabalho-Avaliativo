@@ -187,8 +187,8 @@ int filtroMedia(int **imagem, int tam){
 }
 
 int filtroMediana(int **imagem, int tam){
-
-    int *v = (int*) malloc(sizeof(int)*(tam*tam));
+    int tamV = tam*tam;
+    int *v = (int*) malloc(sizeof(int)*tamV);
     int cont = 0;
     int aux1, aux2;
     for (int i = 0; i < tam; i++){
@@ -198,21 +198,16 @@ int filtroMediana(int **imagem, int tam){
         }
     }
 
-    quicksort(v,0,tam*tam);
+    quicksort(v,0,tamV);
 
-    for (int i = 0; i < tam*tam; i++){
-        printf("%d ",v[i]);
-    }
-    printf("\n");
-    if((tam*tam)%2 == 0){
-        aux1 = (tam*tam)/2;
-        aux2 = ((tam*tam)/2)+1;
+    if(tamV % 2 == 0){
+        aux1 = tamV/2;
+        aux2 = (tamV/2)+1;
 
         printf("%d\n", (v[aux1] + v[aux2])/2);
-
         return (v[aux1] + v[aux2])/2;
     }else{
-        return v[tam/2];
+        return v[tamV/2];
     }
 }
 
